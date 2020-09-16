@@ -6,11 +6,11 @@ A próxima etapa do projeto consiste em implementar o modelo de memória cache p
 
 A memória cache é formada por m "blocos" (chamados cache lines) de K palavras de memória, cada um precedido por uma "etiqueta" (tag) que identifica o bloco de memória principal sendo atualmente armazenado naquela cache line e uma flag para indicar se foi modificada ou não (veja figura abaixo).
 
-![]("Screenshot 2020-09-16 112711.png")
+![](Screenshot 2020-09-16 112711.png)
 
 Neste contexto, a CPU solicita o conteúdo da memória em um determinado endereço x que é enviado não mais diretamente à memória principal, mas sim à cache. Ao receber esta requisição de acesso a um endereço, o sistema deve verificar se o conteúdo do endereço solicitado está ou não em cache e tomar as medidas necessárias em caso negativo (cache miss), buscando o bloco contendo o endereço solicitado da memória principal (RAM) conforme ilustrado na figura abaixo.
 
-![]("Screenshot 2020-09-16 112742.png")
+![](Screenshot 2020-09-16 112742.png)
 
 # Especificação da Memória Cache
 Uma vez que o tamanho da memória principal é de 16M, a CPU gerará endereços de 24 bits. A capacidade da cache deverá ser de 8192 palavras com cada cache line armazenando 64 palavras (i.e., K=64).
