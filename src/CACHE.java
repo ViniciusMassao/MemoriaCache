@@ -1,29 +1,60 @@
-public class CACHE extends Memoria{
-    private int []cache = null;
+import java.util.ArrayList;
+
+public class CACHE{
+    // CACHE é composta por uma arraylist de CACHELINE
+    private ArrayList<CACHELINE>mem;
     private RAM ram = null;
-    private int init_addr = -1; // endereco inicial da RAM mapeado (-1 = nada mapeado)
 
+    public CACHE(){};
+
+    // inicializando a mem da CACHE com um tamanho limitado
     public CACHE(int size, RAM ram){
-        super(size);
-        cache = new int[size];
-        this.ram=ram;
+        this.mem = new ArrayList<CACHELINE>(size);
+        this.ram = ram;
     }
 
-    public int Get(int address) throws InvalidAddress{
-        if(!IsMapped(address)) this.Map(address);
-        return cache[address-init_addr];
+    // inserindo uma CACHELINE na CACHE
+    public void insertCacheLine(int size_bloco, int end_bloco){
+        this.mem.add(new CACHELINE(size_bloco, end_bloco));
     }
 
-    public void Set(int address, int word) throws InvalidAddress{
-        ram.Set(address,word);
+    //
+    public void Set(int address, int word){
+        //
     }
 
-    private boolean IsMapped(int address){
-        // apenas retornando qualquer coisa pra nao ficar danddo erro
-        return true;
+    public ArrayList<CACHELINE> getMem() {return mem;}
+
+    public void setMem(ArrayList<CACHELINE> mem) {this.mem = mem;}
+
+    // fazendo uma condicao & logica com os ultimos 6 bits e retornando como int
+    public int w(int x){
+        return x & ((1<<6)-1);
     }
 
-    private void Map(int address) throws InvalidAddress{
-        // implementar
+    // ignorando os 13 bits a direita e pagando o resto e retornando como int
+    public int t(int x){
+        return x >> 13;
+    }
+
+    // fazendo uma condicao & logica com o x menos os ultimos 6 bits e
+    // comparando esse x >> 6 com os ultimos 7 bits. Retornando int
+    public int r(int x){
+        return x >> 6 & ((1<<7)-1);
+    }
+
+    // ignorando os ultimos 6 bits e retornando int
+    public int s(int x){
+        return x >> 6;
+    }
+
+    // funcao para contar os bits de um int
+    public int nbits(int v){
+        int cont = 0;
+        while (v>0){
+            v = v >> 1;
+            ++cont;
+        }
+        return cont-1;
     }
 }

@@ -1,8 +1,11 @@
 public class Memoria {
     private int size = 0;
-    private int [] mem = null;
+    private int [] mem;
 
-    public Memoria(int size) {this.size = size;}
+    public Memoria(int size) {
+        this.size = size;
+        this.mem = new int[size];
+    }
 
     public int Size() { return size; }
 
