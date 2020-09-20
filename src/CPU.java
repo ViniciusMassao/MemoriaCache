@@ -2,7 +2,6 @@ public class CPU {
     private CACHE cache = null;
     private IO io = null;
     private int PC = 0;
-    private int K = 64; // tamanho bloco
 
     public CPU(CACHE c, IO es) {
         cache = c;
@@ -19,6 +18,9 @@ public class CPU {
 //            cache.Set(i, i - iaddr + 1);
 //            io.Write(i + " -> " + cache.Get(i));
 //        }
+        PC = pc_address;
+        // cache miss
+        io.Write("Nenhum valor inserido na cache e a CPU pede o valor do endereco-> " + cache.Get(PC));
     }
 }
 

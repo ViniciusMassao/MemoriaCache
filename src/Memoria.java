@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Memoria {
     private int size = 0;
     private int [] mem;
@@ -23,6 +25,14 @@ public class Memoria {
         if (address < 0 || address >= size)
             throw new InvalidAddress(address);
     }
+
+    // funcao para copiar uma parte de uma array, partindo de um indice inicial e dando o indice final para parar
+    public int [] copyBlock(int init_address, int end_address){
+//        for(int i = init_address; i < end_address; i++) System.out.println("indices do bloco->"+i);
+        return Arrays.copyOfRange(mem, init_address, end_address);
+    }
+
+    public void setBloco(int[]bloco){mem = bloco;}
 }
 
 class InvalidAddress extends Exception {
