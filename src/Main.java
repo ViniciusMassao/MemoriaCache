@@ -10,10 +10,16 @@ public class Main {
         CACHE cache = new CACHE(TCACHE, ram);
         // para inserir a word na RAM o endereco da memoria tem que ser s + w
         // w = 5 que contem a paralavra
-        ram.Set(165010,120);
+        ram.Set(10560325,120);
+        // exemplo quando o t e o t' sao diferentes porem o r(indice da cacheline) eh o mesmo
+        ram.Set(8397630,50);
+        // cache hit
+        ram.Set(10560327,200);
 //        ram.Set(11,127);
 
         CPU cpu = new CPU(cache, es);
         cpu.Run(10560325);
+        cpu.Run(8397630);
+        cpu.Run(10560327);
     }
 }

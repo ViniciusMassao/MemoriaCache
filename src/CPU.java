@@ -19,8 +19,7 @@ public class CPU {
 //            io.Write(i + " -> " + cache.Get(i));
 //        }
         PC = pc_address;
-        // cache miss
-        io.Write("Nenhum valor inserido na cache e a CPU pede o valor do endereco-> " + cache.Get(PC));
+        io.Write("PC -> " + PC+ ", retorno -> " + cache.Get(PC));
     }
 }
 

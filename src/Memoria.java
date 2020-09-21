@@ -33,6 +33,10 @@ public class Memoria {
     }
 
     public void setBloco(int[]bloco){mem = bloco;}
+
+    public void serBlocoFromTo(int[]bloco, int init_address, int end_address){
+
+    }
 }
 
 class InvalidAddress extends Exception {

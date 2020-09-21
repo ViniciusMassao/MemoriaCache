@@ -20,7 +20,7 @@ public class CACHELINE {
 
     public Memoria getBloco() {return bloco;}
 
-    public void setBloco(int[] bloco) {
+    public void setBlocoCacheLine(int[] bloco) {
         Memoria new_mem = new Memoria(bloco.length);
         new_mem.setBloco(bloco);
         this.bloco = new_mem;
