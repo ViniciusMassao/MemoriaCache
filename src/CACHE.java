@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class CACHE{
     // CACHE é composta por uma arraylist de CACHELINE
     private CACHELINE[]mem;
@@ -16,8 +14,11 @@ public class CACHE{
 
     // preenchendo dados de uma CACHELINE
     public void insertCacheLine(int size_bloco, int address_bloco){
+        // t de address
         int t_tag = t(address_bloco);
+        // r de address
         int r_address = r(address_bloco);
+        // s de address
         int s_address = init_address_bloco(address_bloco);
 
         // criando no indice(index) uma nova instancia de CACHELINE com endereco inicial e tamanho do bloco de memoria
@@ -28,10 +29,15 @@ public class CACHE{
         mem[r_address].setBlocoCacheLine(ram.copyBlock(s_address, (s_address+size_bloco)));
     }
 
-//    // funcao para settar valores na cache
-//    public void Set(int address, int word){
-//        //
-//    }
+    // funcao para settar valores na cache
+    public void Set(int address, int word)throws InvalidAddress{
+        // r de address
+        int r_address = r(address);
+        // w de address
+        int w_address = w(address);
+        // settando a word no indice da word
+        mem[r_address].SetValor(w_address, word);
+    }
 
     public int Get(int address) throws InvalidAddress{
         // r de address
@@ -44,13 +50,10 @@ public class CACHE{
         if(mem[r_address] == null){
             insertCacheLine(K, address);
         }
-        // caso a tag da cacheline e a tag do endereco estejam iguais, e modif eh falso
-        // retornar dado pra CPU
-        else if(mem[r_address].getTag() == t(address) && !mem[r_address].getModif()){ // cache hit
-        }
+
         // caso t do endereco pedido pela CPU for diferente do t que esta na CACHE, a CACHE precisa inserir na RAM
         // o bloco(atualizar) e retornar o dado para CPU
-        else if(mem[r_address].getTag() != t(address)){
+        else if(mem[r_address].getTag() != t(address) && mem[r_address].getModif()){
             int init_address = init_address_bloco(address);
             int count = 0;
             // copiando da CACHE para a RAM o bloco
@@ -59,8 +62,10 @@ public class CACHE{
                 count++;
             }
         }
+        // caso ele passe por tudo sem entrar em nenhum if ele dah cache hit
         return mem[r_address].getWord(w_address);
     }
+
     public CACHELINE[] getMem() {return mem;}
 
     public void setMem(CACHELINE[] mem) {this.mem = mem;}

@@ -9,16 +9,13 @@ public class CPU {
     }
 
     public void Run(int pc_address) throws InvalidAddress {
-
-//        PC = pc_address;
-//        int iaddr = cache.Get(PC++);
-//        int faddr = cache.Get(PC);
-//
-//        for (int i=iaddr; i<=faddr; ++i) {
-//            cache.Set(i, i - iaddr + 1);
-//            io.Write(i + " -> " + cache.Get(i));
-//        }
+        // endereco
         PC = pc_address;
+
+        // forcando o endereco a settar um valor diferente pra alterar o modif pra true
+        if(pc_address == 8733541){cache.Set(8733541, 10);}
+
+        // imprimindo no dispositivo de entrada e saida
         io.Write("PC -> " + PC+ ", retorno -> " + cache.Get(PC));
     }
 }
