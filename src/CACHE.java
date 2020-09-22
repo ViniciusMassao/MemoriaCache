@@ -46,7 +46,7 @@ public class CACHE{
         int w_address = w(address);
 
         // caso nao tenha o bloco do endereco pedido em cache, entao devera buscar na RAM o bloco e inserir
-        // na CACHE o bloco e retornar o valor pedido pela CPU
+        // na CACHE e retornar o valor pedido pela CPU
         if(mem[r_address] == null){
             insertCacheLine(K, address);
         }
@@ -55,12 +55,9 @@ public class CACHE{
         // o bloco(atualizar) e retornar o dado para CPU
         else if(mem[r_address].getTag() != t(address) && mem[r_address].getModif()){
             int init_address = init_address_bloco(address);
-            int count = 0;
             // copiando da CACHE para a RAM o bloco
-            for(int i = 0; i < K; i++){
-                ram.Set(init_address+count, mem[r_address].getWord(i));
-                count++;
-            }
+            for(int i = 0; i < K; i++)
+                ram.Set(init_address+i, mem[r_address].getWord(i));
         }
         // caso ele passe por tudo sem entrar em nenhum if ele dah cache hit
         return mem[r_address].getWord(w_address);
