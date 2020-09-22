@@ -1,3 +1,4 @@
+// Alunos: Enzo Matheus Paganini, Osmar Andre Bassi e Vinicius Massao Dziewulski
 public class Main {
 
     public static void main(String[] args) throws InvalidAddress {
@@ -9,7 +10,7 @@ public class Main {
         RAM ram = new RAM(TRAM);
         CACHE cache = new CACHE(TCACHE, ram);
         // para inserir a word na RAM o endereco da memoria tem que ser s + w
-        // w = 5 que contem a palavra 120
+        // w = 5 que contem a palavra 120  
         ram.Set(10560325,120);
         // cache hit
         ram.Set(10560327,200);
